@@ -11,40 +11,34 @@ namespace prjMauiDemo.Models
         public string getNumber()
         {
 
-            int[] numbers = new int[6];
+            HashSet<int> numbers = new HashSet<int>();
 
             Random rnd = new Random();
 
-            int count = 0;
-            
-            while (count < 6)
+            while (numbers.Count<6)
             {
-                int temp = rnd.Next(1,50); 
-
-                if (!is在陣列中已有此隨機數(temp,numbers))
-                {
-                    numbers[count] = temp;
-                    count++;
-                }
-                   
+                numbers.Add(rnd.Next(1,50));
             }
+            
+            var newarr = numbers.ToArray();
 
-            for (int i = numbers.Length-1; i >0; i--)
+
+            for (int i = newarr.Length-1; i >0; i--)
             {
                 for (int j = 0; j < i ; j++)
                 {
-                    if (numbers[j] > numbers[j + 1])
+                    if (newarr[j] > newarr[j + 1])
                     {
-                        int big = numbers[j];
-                        numbers[j] = numbers[j + 1];
-                        numbers[j+1] = big;
+                        int big = newarr[j];
+                        newarr[j] = newarr[j + 1];
+                        newarr[j+1] = big;
                     }
                 }
             }
 
             string result = string.Empty;
 
-            foreach(int i in numbers)
+            foreach(int i in newarr)
             {
                 result += i+" ";
             }

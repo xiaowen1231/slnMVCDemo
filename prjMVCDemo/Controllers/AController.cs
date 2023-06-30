@@ -68,6 +68,7 @@ namespace prjMVCDemo.Controllers
             con.ConnectionString = @"Data Source=.;Initial Catalog=dbDemo;Integrated Security=True";
             con.Open();
             con.Close();
+            return "";
         }
         // GET: A
         public ActionResult Index()
