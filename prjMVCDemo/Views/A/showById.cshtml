@@ -1,12 +1,25 @@
 ﻿
 @{
     ViewBag.Title = "showById";
+    string photo = "anonymous.jpg";
+    if (ViewBag.customer != null)
+    {
+        photo = ViewBag.customer.fId + ".jpg";
+    }
 }
 
 <h2>查詢客戶資料範例</h2>
-<p>
-    <h3>@ViewBag.name</h3>
-</p>
-<p>@ViewBag.phone</p>
-<p>@ViewBag.address</p>
+<img style="width:300px" src="~/Images/@photo" />
+@{
+    if (ViewBag.customer == null)
+    {
+        <h3>查無會員資料</h3>
 
+    }
+    else
+    { 
+        <h3>@ViewBag.customer.fName</h3>
+        <p>@ViewBag.customer.fPhone</p>
+        <p>@ViewBag.customer.fEmail</p>
+    }
+}

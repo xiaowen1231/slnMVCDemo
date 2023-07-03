@@ -1,4 +1,5 @@
 ﻿using prjMauiDemo.Models;
+using prjMVCDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -60,9 +61,7 @@ namespace prjMVCDemo.Controllers
 
         public ActionResult showById(int? id)
         {
-            ViewBag.name = "未輸入ID";
-
-            if(id != null)
+            if (id != null)
             { 
                 SqlConnection con = new SqlConnection();
                 con.ConnectionString = @"Data Source=.;Initial Catalog=dbDemo;Integrated Security=True";
@@ -73,12 +72,14 @@ namespace prjMVCDemo.Controllers
                 cmd.CommandText = "SELECT * FROM tCustomer WHERE fId = " + id.ToString();
 
                 SqlDataReader reader = cmd.ExecuteReader();
-                ViewBag.name = "沒有符合查詢條件的資料";
                 if (reader.Read())
                 {
-                    ViewBag.name = reader["fName"].ToString();
-                    ViewBag.phone = reader["fPhone"];
-                    ViewBag.address = reader["fAddress"];
+                    CCustomer x = new CCustomer();
+                    x.fId = (int)reader["fId"];
+                    x.fName = reader["fName"].ToString();
+                    x.fPhone = reader["fPhone"].ToString();
+                    x.fEmail = reader["fEmail"].ToString();
+                    ViewBag.customer = x;
                 }
                 con.Close();
             }
