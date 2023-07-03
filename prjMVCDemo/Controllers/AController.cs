@@ -67,8 +67,21 @@ namespace prjMVCDemo.Controllers
             SqlConnection con = new SqlConnection();
             con.ConnectionString = @"Data Source=.;Initial Catalog=dbDemo;Integrated Security=True";
             con.Open();
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT * FROM tCustomer WHERE fId = " + id.ToString();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            string s = "沒有符合查詢條件的資料";
+            if (reader.Read())
+            {
+                s = reader["fName"].ToString() + "/" +
+                    reader["fPhone"].ToString();
+            }
             con.Close();
-            return "";
+
+            return s;
         }
         // GET: A
         public ActionResult Index()
