@@ -86,6 +86,33 @@ namespace prjMVCDemo.Controllers
             return View();
         }
 
+        public ActionResult BindingById(int? id)
+        {
+            CCustomer x = null;
+            if (id != null)
+            {
+                SqlConnection con = new SqlConnection();
+                con.ConnectionString = @"Data Source=.;Initial Catalog=dbDemo;Integrated Security=True";
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM tCustomer WHERE fId = " + id.ToString();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    x = new CCustomer();
+                    x.fId = (int)reader["fId"];
+                    x.fName = reader["fName"].ToString();
+                    x.fPhone = reader["fPhone"].ToString();
+                    x.fEmail = reader["fEmail"].ToString();
+                }
+                con.Close();
+            }
+            return View(x);
+        }
+
         public string queryById(int? id)
         {
             if (id == null)
@@ -111,6 +138,30 @@ namespace prjMVCDemo.Controllers
 
             return s;
         }
+
+        public string testingInsert()
+        {
+            CCustomer x = new CCustomer();
+            x.fName = "Hank";
+            x.fPhone = "0955772889";
+            x.fEmail = "Hank@gmail.com";
+            x.fAddress = "Taipei";
+            x.fPassword = "1234";
+
+            new CCustomerFactory().create(x);
+            return "新增資料成功";
+        }
+
+        public string testingDelete(int? id) 
+        {
+            if(id == null)
+            {
+                return "請輸入刪除會員的Id";
+            }
+            new CCustomerFactory().delete((int)id);
+            return "刪除資料成功";
+        }
+
         // GET: A
         public ActionResult Index()
         {

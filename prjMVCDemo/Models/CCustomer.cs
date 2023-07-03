@@ -11,5 +11,7 @@ namespace prjMVCDemo.Models
         public string fName { get; set; }
         public string fPhone { get; set; }
         public string fEmail { get; set; }
+        public string fAddress { get; set; }
+        public string fPassword { get; set; }
     }
 }
