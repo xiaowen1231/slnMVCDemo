@@ -58,6 +58,33 @@ namespace prjMVCDemo.Controllers
             return "目前伺服器上的實體位置：" + Server.MapPath(".");
         }
 
+        public ActionResult showById(int? id)
+        {
+            ViewBag.name = "未輸入ID";
+
+            if(id != null)
+            { 
+                SqlConnection con = new SqlConnection();
+                con.ConnectionString = @"Data Source=.;Initial Catalog=dbDemo;Integrated Security=True";
+                con.Open();
+
+                SqlCommand cmd = con.CreateCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM tCustomer WHERE fId = " + id.ToString();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                ViewBag.name = "沒有符合查詢條件的資料";
+                if (reader.Read())
+                {
+                    ViewBag.name = reader["fName"].ToString();
+                    ViewBag.phone = reader["fPhone"];
+                    ViewBag.address = reader["fAddress"];
+                }
+                con.Close();
+            }
+            return View();
+        }
+
         public string queryById(int? id)
         {
             if (id == null)
