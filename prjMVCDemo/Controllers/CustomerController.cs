@@ -12,8 +12,14 @@ namespace prjMVCDemo.Controllers
         // GET: Customer
         public ActionResult List()
         {
-            List<CCustomer> x = new CCustomerFactory().queryAll();
-            return View(x);
+            List<CCustomer> datas = null;
+            string keyword = Request.Form["txtKeyword"];
+            if (string.IsNullOrEmpty(keyword))
+                datas = new CCustomerFactory().queryAll();
+            else
+                datas = new CCustomerFactory().queryByKeyword(keyword);
+             
+            return View(datas);
         }
 
         public ActionResult Create()
@@ -40,6 +46,23 @@ namespace prjMVCDemo.Controllers
             {
                 new CCustomerFactory().delete((int)id);
             }
+            return RedirectToAction("List");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("List");
+            }
+            CCustomer x = new CCustomerFactory().queryById((int)id);
+            return View(x);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CCustomer x)
+        {
+            new CCustomerFactory().update(x);
             return RedirectToAction("List");
         }
     }

@@ -190,5 +190,18 @@ namespace prjMVCDemo.Models
 
             con.Close();
         }
+
+        public List<CCustomer> queryByKeyword(string keyword)
+        {
+            string sql = "SELECT * FROM tCustomer WHERE ";
+            sql += "fName LIKE @keyword ";
+            sql += "OR fPhone LIKE @keyword ";
+            sql += "OR fEmail LIKE @keyword ";
+            sql += "OR fAddress LIKE @keyword ";
+            
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("keyword", "%" + (object)keyword + "%"));
+            return queryBySql(sql, parameters);
+        }
     }
 }
