@@ -1,0 +1,44 @@
+﻿@using prjMVCDemo.Models
+@model List<CCustomer>
+@{
+    ViewBag.Title = "List";
+}
+<style>
+    table,tr,td{
+        border:1px solid black;
+        border-collapse:collapse;
+    }
+    td{
+        padding:5px;
+    }
+</style>
+<h2>客戶資料一覽表</h2>
+<a href="~/Customer/Create">新增客戶</a>
+<table>
+    <tr>
+        <td>編號</td>
+        <td>姓名</td>
+        <td>電話</td>
+        <td>電子郵件</td>
+        <td>地址</td>
+        <td>密碼</td>
+    </tr>
+    @{ 
+        int count = 0;
+        foreach(var item in Model)
+        {
+            count++;
+        <tr>
+            <td>@count</td>
+            <td>@item.fName</td>
+            <td>@item.fPhone</td>
+            <td>@item.fEmail</td>
+            <td>@item.fAddress</td>
+            <td>@item.fPassword</td>
+            <td>@Html.ActionLink("刪除","Delete", "Customer", new { id = item.fId},
+               new {onclick="return confirm('確定要刪除嗎?')"})</td>
+        </tr>
+        }
+    }
+</table>
+

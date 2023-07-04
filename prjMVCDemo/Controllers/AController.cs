@@ -11,6 +11,26 @@ namespace prjMVCDemo.Controllers
 {
     public class AController : Controller
     {
+
+        public ActionResult demoForm()
+        {
+            ViewBag.ans = "X = ?";
+            if (!string.IsNullOrEmpty(Request.Form["txtNum1"]))
+            {
+                double numA = Convert.ToDouble(Request.Form["txtNum1"]);
+                double numB = Convert.ToDouble(Request.Form["txtNum2"]);
+                double numC = Convert.ToDouble(Request.Form["txtNum3"]);
+                ViewBag.numA = numA;
+                ViewBag.numB = numB;
+                ViewBag.numC = numC;
+                double num4 = Math.Sqrt((numB * numB) - (4 *numA * numC));
+                double ans1 = (-numB + num4) / (2 * numA);
+                double ans2 = (-numB - num4) / (2 * numA);
+                ViewBag.ans = $"X = {ans1.ToString("0.0#")} or {ans2.ToString("0.0#")}";
+            }
+            return View();
+        }
+
         public string sayHello()
         {
             return "Hello ASP.NET MVC.";

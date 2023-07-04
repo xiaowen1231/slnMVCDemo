@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "demoForm";
+}
+
+<h2>demoForm</h2>
+
+<form method="post">
+    <div>請輸入數字</div>
+    <div>
+        <input type="text" name="txtNum1" value="@ViewBag.numA"/><span>X^2</span>
+        <input type="text" name="txtNum2" value="@ViewBag.numB"/><span>X+</span>
+        <input type="text" name="txtNum3" value="@ViewBag.numC"/><span>=0</span>
+    </div>
+    <input type="submit" value="計算"/><span>@ViewBag.ans</span>
+</form>
