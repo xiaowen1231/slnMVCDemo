@@ -143,9 +143,9 @@ namespace prjMVCDemo.Controllers
         {
             CCustomer x = new CCustomer();
             x.fName = "Hank";
-            x.fPhone = "0955772889";
+            //x.fPhone = "0955772889";
             x.fEmail = "Hank@gmail.com";
-            x.fAddress = "Taipei";
+            //x.fAddress = "Taipei";
             x.fPassword = "1234";
 
             new CCustomerFactory().create(x);
@@ -160,6 +160,25 @@ namespace prjMVCDemo.Controllers
             }
             new CCustomerFactory().delete((int)id);
             return "刪除資料成功";
+        }
+
+        public string testingUpdate()
+        {
+            CCustomer x = new CCustomer();
+            x.fId = 4;
+            x.fName = "Tom";
+            x.fPhone = "0955772889";
+            x.fEmail = "Tom@gmail.com";
+            //x.fAddress = "Taipei";
+            //x.fPassword = "1234";
+
+            new CCustomerFactory().update(x);
+            return "修改資料成功";
+        }
+
+        public string testingQuery() 
+        {
+            return "目前客戶數:" + new CCustomerFactory().queryAll().Count.ToString();
         }
 
         // GET: A
