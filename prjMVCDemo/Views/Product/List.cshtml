@@ -9,11 +9,11 @@
 {
     @:<span>搜尋關鍵字</span>
     @Html.TextBox("txtKeyword");
-    <input type="submit" value="搜尋" />
+    <input type="submit" value="搜尋" class="btn btn-dark"/>
 }
 <p>
 
-    @Html.ActionLink("上架課程", "Create")
+    @Html.ActionLink("上架課程", "Create", "Product", null, new { @class = "btn btn-dark" })
 </p>
 <table class="table">
     <tr>
@@ -32,7 +32,8 @@
         <th>
             @Html.DisplayNameFor(model => model.fPrice)
         </th>
-        <th></th>
+        <th>修改</th>
+        <th>刪除</th>
     </tr>
 
     @{
@@ -57,9 +58,12 @@
                     @Html.DisplayFor(modelItem => item.fPrice)
                 </td>
                 <td>
-                    @Html.ActionLink("修改", "Edit", "Product", new { id = item.fId }, null) |
+                    @Html.ActionLink("修改", "Edit", "Product", new { id = item.fId }, new { @class = "btn btn-dark" }) 
+                   
+                </td>
+                <td>
                     @Html.ActionLink("刪除", "Delete", "Product", new { id = item.fId },
-                   new { onclick = "return confirm('確定刪除?')" })
+                  new { onclick = "return confirm('確定刪除?')" , @class = "btn btn-danger" })
                 </td>
             </tr>
         }

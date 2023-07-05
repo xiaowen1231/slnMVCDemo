@@ -8,14 +8,14 @@
 <h2>客戶資料一覽表</h2>
 <div>
     <form method="post">
-        <div style="display:flex; gap:10px">
+        <div class="d-flex align-items-center">
             <label>關鍵字</label>
             <input class="form-control" type="text" name="txtKeyword" />
             <input class="btn btn-dark" type="submit" value="查詢" />
         </div>
     </form>
 </div>
-<a class="btn btn-primary" href="~/Customer/Create">新增客戶</a>
+<a class="btn btn-dark" href="~/Customer/Create">新增客戶</a>
 <table class="table table-bordered">
     <tr>
         <td>編號</td>
@@ -41,7 +41,7 @@
                 <td>@item.fPassword</td>
                 <td>
                     @Html.ActionLink("修改", "Edit", "Customer", new { id = item.fId },
-                new { @class = "btn btn-success" })
+                new { @class = "btn btn-dark" })
                 </td>
 
                 <td>

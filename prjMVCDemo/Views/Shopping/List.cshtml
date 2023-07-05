@@ -4,10 +4,10 @@
     ViewBag.Title = "List";
 }
 
-<h2>加入購物車</h2>
+<h2>選課系統</h2>
 
 <p>
-    @Html.ActionLink("檢視購物車", "Create")
+    @Html.ActionLink("檢視購物車", "Create", "Shopping", null, new { @class = "btn btn-outline-primary" })
 </p>
 <table class="table">
     <tr>
@@ -24,11 +24,11 @@
             @Html.DisplayNameFor(model => model.fPrice)
         </th>
         <th>
-            <span>加入購物車</span>
+            <span>選項</span>
         </th>
     </tr>
 
-    @{ 
+    @{
         int count = 0;
         foreach (var item in Model)
         {
@@ -47,7 +47,7 @@
                     @Html.DisplayFor(modelItem => item.fPrice)
                 </td>
                 <td>
-                    @Html.ActionLink("加入", "AddToCart", new { id=item.fId })
+                    @Html.ActionLink("加入", "AddToCart", "Shopping", new { id = item.fId }, new { @class = "btn btn-outline-primary" })
                 </td>
             </tr>
         }
