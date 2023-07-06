@@ -7,12 +7,15 @@
 <h2>選課系統</h2>
 
 <p>
-    @Html.ActionLink("檢視購物車", "Create", "Shopping", null, new { @class = "btn btn-outline-primary" })
+    @Html.ActionLink("檢視購物車", "CartView", "Shopping", null, new { @class = "btn btn-outline-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
             <span>序號</span>
+        </th>
+        <th>
+            課程照片
         </th>
         <th>
             @Html.DisplayNameFor(model => model.fName)
@@ -38,6 +41,9 @@
                     @count
                 </td>
                 <td>
+                    <img src="~/Images/@item.fImagePath" width="150"/>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.fName)
                 </td>
                 <td>
@@ -47,7 +53,10 @@
                     @Html.DisplayFor(modelItem => item.fPrice)
                 </td>
                 <td>
-                    @Html.ActionLink("加入", "AddToCart", "Shopping", new { id = item.fId }, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("加入(Database)", "AddToCart", "Shopping", new { id = item.fId }, new { @class = "btn btn-outline-primary" })
+                </td>
+                <td>
+                    @Html.ActionLink("加入(Session)", "AddToSession", "Shopping", new { id = item.fId }, new { @class = "btn btn-outline-primary" })
                 </td>
             </tr>
         }

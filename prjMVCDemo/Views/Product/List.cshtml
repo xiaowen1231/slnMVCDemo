@@ -21,6 +21,9 @@
             <p>序號</p>
         </th>
         <th>
+            課程照片
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.fName)
         </th>
         <th>
@@ -44,6 +47,9 @@
             <tr>
                 <td>
                     @count
+                </td>
+                <td>
+                    <img src="~/Images/@item.fImagePath" width="150"/>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.fName)

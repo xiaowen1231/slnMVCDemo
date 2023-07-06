@@ -11,6 +11,51 @@ namespace prjMVCDemo.Controllers
 {
     public class AController : Controller
     {
+        static int count = 0;
+
+        public ActionResult showByCookie()
+        {
+            int count3 = 0;
+            HttpCookie cookie = Request.Cookies["count"];
+            if (cookie != null)
+            {
+                count3 = Convert.ToInt32(cookie.Value);
+            }
+            count3++;
+            cookie = new HttpCookie("count");
+            cookie.Value = count3.ToString();
+            cookie.Expires = DateTime.Now.AddSeconds(20);
+            Response.Cookies.Add(cookie);
+            ViewBag.count = count3;
+
+            return View();
+        }
+        public ActionResult showBySession()
+        {
+            int count2 = 0;
+            if (Session["count"] != null)
+            {
+                count2 = (int)Session["count"];
+            }
+            count2++;
+            Session["count"] = count2;
+            ViewBag.count = count2;
+            return View();
+        }
+        public ActionResult show()
+        {
+            count++;
+            ViewBag.count = count;
+            return View();
+        }
+        public ActionResult demoUpload(HttpPostedFileBase photo)
+        {
+            if (photo != null)
+            {
+                photo.SaveAs(@"C:\ISpan\Class\QNote\MVC\slnMVCDemo\prjMVCDemo\Images\test1.jpg");
+            }
+            return View();
+        }
 
         public ActionResult demoForm()
         {
@@ -23,7 +68,7 @@ namespace prjMVCDemo.Controllers
                 ViewBag.numA = numA;
                 ViewBag.numB = numB;
                 ViewBag.numC = numC;
-                double num4 = Math.Sqrt((numB * numB) - (4 *numA * numC));
+                double num4 = Math.Sqrt((numB * numB) - (4 * numA * numC));
                 double ans1 = (-numB + num4) / (2 * numA);
                 double ans2 = (-numB - num4) / (2 * numA);
                 ViewBag.ans = $"X = {ans1.ToString("0.0#")} or {ans2.ToString("0.0#")}";
@@ -82,7 +127,7 @@ namespace prjMVCDemo.Controllers
         public ActionResult showById(int? id)
         {
             if (id != null)
-            { 
+            {
                 SqlConnection con = new SqlConnection();
                 con.ConnectionString = @"Data Source=.;Initial Catalog=dbDemo;Integrated Security=True";
                 con.Open();
@@ -172,9 +217,9 @@ namespace prjMVCDemo.Controllers
             return "新增資料成功";
         }
 
-        public string testingDelete(int? id) 
+        public string testingDelete(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return "請輸入刪除會員的Id";
             }
@@ -196,7 +241,7 @@ namespace prjMVCDemo.Controllers
             return "修改資料成功";
         }
 
-        public string testingQuery() 
+        public string testingQuery()
         {
             return "目前客戶數:" + new CCustomerFactory().queryAll().Count.ToString();
         }

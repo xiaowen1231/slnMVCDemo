@@ -1,8 +1,9 @@
-﻿@model prjMVCDemo.tProduct
-
+﻿
 @{
-    ViewBag.Title = "AddToCart";
+    ViewBag.Title = "AddToSession";
 }
+
+<h2>AddToSession</h2>
 
 <h2>加入選課單</h2>
 
@@ -29,9 +30,5 @@
 }
 
 <div>
-    @Html.ActionLink("返回", "List", "Product", null, new {@class="btn btn-outline-dark"})
+    @Html.ActionLink("返回", "List", "Shopping", null, new { @class = "btn btn-outline-dark" })
 </div>
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

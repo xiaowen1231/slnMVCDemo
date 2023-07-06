@@ -14,8 +14,8 @@ namespace prjMVCDemo.Controllers
             string keyword = Request.Form["txtKeyword"];
             IEnumerable<tProduct> datas = null;
             dbDemoEntities db = new dbDemoEntities();
-            if (string.IsNullOrEmpty(keyword)) 
-            { 
+            if (string.IsNullOrEmpty(keyword))
+            {
                 datas = from t in db.tProduct
                         select t;
             }
@@ -40,11 +40,11 @@ namespace prjMVCDemo.Controllers
         }
         public ActionResult Delete(int? id)
         {
-            if(id!=null)
+            if (id != null)
             {
                 dbDemoEntities db = new dbDemoEntities();
-                tProduct prod = db.tProduct.FirstOrDefault(p=>p.fId==id);
-                if(prod!=null)
+                tProduct prod = db.tProduct.FirstOrDefault(p => p.fId == id);
+                if (prod != null)
                 {
                     db.tProduct.Remove(prod);
                     db.SaveChanges();
@@ -60,8 +60,8 @@ namespace prjMVCDemo.Controllers
                 return RedirectToAction("List");
             }
             dbDemoEntities db = new dbDemoEntities();
-            tProduct prod = db.tProduct.FirstOrDefault(x=>x.fId==id);
-            
+            tProduct prod = db.tProduct.FirstOrDefault(x => x.fId == id);
+
             return View(prod);
         }
 
@@ -70,8 +70,15 @@ namespace prjMVCDemo.Controllers
         {
             var db = new dbDemoEntities();
             tProduct productInDb = db.tProduct.FirstOrDefault(x => x.fId == productInForm.fId);
-            if (productInDb!=null)
+            if (productInDb != null)
             {
+                if (productInForm.photo != null)
+                {
+                    string photoName = Guid.NewGuid().ToString() + ".jpg";
+                    productInDb.fImagePath = photoName;
+                    string test = Server.MapPath("../../Images/" + photoName);
+                    productInForm.photo.SaveAs(Server.MapPath("../../Images/" + photoName));
+                }
                 productInDb.fName = productInForm.fName;
                 productInDb.fQty = productInForm.fQty;
                 productInDb.fCost = productInForm.fCost;
