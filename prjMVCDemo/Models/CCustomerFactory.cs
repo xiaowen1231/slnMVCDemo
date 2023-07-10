@@ -203,5 +203,23 @@ namespace prjMVCDemo.Models
             parameters.Add(new SqlParameter("keyword", "%" + (object)keyword + "%"));
             return queryBySql(sql, parameters);
         }
+
+        public CCustomer authenticated(string account, string password)
+        {
+            string sql = "SELECT * FROM tCustomer WHERE ";
+            sql += "fEmail = @fEmail ";
+            sql += "OR fPassword = @fPassword ";
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("fEmail", account));
+            parameters.Add(new SqlParameter("fPassword", password));
+
+            List<CCustomer> customer = queryBySql(sql, parameters);
+            if (customer.Count <= 0)
+            {
+                return null;
+            }
+            return customer[0];
+        }
     }
 }

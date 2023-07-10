@@ -191,6 +191,7 @@
       <DependentUpon>dbDemo.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CAddToCartViewModel.cs" />
+    <Compile Include="ViewModels\CLoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -240,6 +241,7 @@
     <Content Include="Views\Shopping\AddToSession.cshtml" />
     <Content Include="Views\Shopping\CartView.cshtml" />
     <Content Include="Views\Common\Home.cshtml" />
+    <Content Include="Views\Common\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

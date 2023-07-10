@@ -1,7 +1,15 @@
-﻿
+﻿@using prjMVCDemo.Models
 @{
     ViewBag.Title = "Home";
+    string name = "";
+    string email = "";
+    CCustomer customer = Session[CDictionary.SessionKey_LoginCustomer] as CCustomer;
+    if (customer != null)
+    {
+        name = customer.fName;
+        email = customer.fEmail;
+    }
 }
 
-<h2>歡迎登入系統</h2>
+<h2>歡迎 @name [@email] 登入系統</h2>
 
